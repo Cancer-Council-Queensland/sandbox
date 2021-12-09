@@ -35,3 +35,5 @@ yarn-error.log*
 .npmrc
 **/.next
 **/node_modules
+
+.env
