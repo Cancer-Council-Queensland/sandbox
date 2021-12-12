@@ -2,10 +2,10 @@ import { test } from "uvu";
 import * as assert from "uvu/assert";
 import { getLinks } from "../getLinks";
 
-test("getLinks: undefined", () => {
+test("getLinks:", () => {
 	getLinks().then((data) => {
-		assert.instance(data, Object)
-	})
+		assert.instance(data, Object);
+	});
 });
 
-test.run()
+test.run();

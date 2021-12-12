@@ -1,18 +1,17 @@
 import { getLinks } from "./getLinks";
 
 type GenerateLinks = {
-	(site?: string): Promise<any[]>;
-}
+	(): Promise<any[]>;
+};
 
 /**
  *
- * @param site
  * @returns
  */
-export const generateLinks: GenerateLinks = async (site) => {
-	const links = await getLinks(site)
+export const generateLinks: GenerateLinks = async () => {
+	const links = await getLinks();
 
 	// TODO: logic
 
-	return []
-}
+	return [];
+};
