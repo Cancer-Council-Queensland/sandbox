@@ -18,7 +18,7 @@ type Links =
 	| {
 			[uuid: string]: Link;
 	  }
-	| ArrayLike<Link>;
+	| undefined;
 
 type GetLinks = {
 	(site?: string): Promise<Links>;
