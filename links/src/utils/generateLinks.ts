@@ -14,9 +14,7 @@ export const generateLinks: GenerateLinks = async () => {
 	const arr = Object.values(links);
 	let tree = totree(arr, 0);
 
-	fs.writeFileSync("./output.json", JSON.stringify(tree, null, 2));
-
-	return [];
+	return tree;
 };
 
 export const totree = (arr: any[], parent_id: number = 0) => {
