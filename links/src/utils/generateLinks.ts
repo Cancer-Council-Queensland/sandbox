@@ -19,12 +19,12 @@ export const generateLinks: GenerateLinks = async () => {
 	return [];
 };
 
-export const totree = (arr: any[], parent_id) => {
+export const totree = (arr: any[], parent_id: number = 0) => {
 	let tree = [];
 	for (const node of arr) {
 		// use key value to get parent
 		if (node.parent_id === parent_id) {
-			var children = totree(arr, node.id);
+			let children = totree(arr, node.id);
 			if (children.length) {
 				node.children = children;
 			}
