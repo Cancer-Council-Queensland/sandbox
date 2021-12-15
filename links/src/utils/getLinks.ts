@@ -31,10 +31,7 @@ type GetLinks = {
 export const getLinks: GetLinks = async () => {
 	try {
 		const slug = `cdn/links`;
-		const { data } = await storyblok.get(slug, {
-			token: "api token",
-		});
-
+		const { data } = await storyblok.get(slug);
 		return data.links;
 	} catch (error: any) {
 		console.log(`Cannot get:`, error.message);
