@@ -1,7 +1,8 @@
+import fs from "fs";
 import { getLinks } from "./getLinks";
 
 type GenerateLinks = {
-	(): Promise<any[]>;
+	(): Promise<any>;
 };
 
 /**
@@ -10,8 +11,25 @@ type GenerateLinks = {
  */
 export const generateLinks: GenerateLinks = async () => {
 	const links = await getLinks();
+	const arr = Object.values(links);
+	let tree = totree(arr, 0);
 
-	// TODO: logic
+	fs.writeFileSync("./output.json", JSON.stringify(tree, null, 2));
 
 	return [];
+};
+
+export const totree = (arr: any[], parent_id) => {
+	let tree = [];
+	for (const node of arr) {
+		// use key value to get parent
+		if (node.parent_id === parent_id) {
+			var children = totree(arr, node.id);
+			if (children.length) {
+				node.children = children;
+			}
+			tree.push(node);
+		}
+	}
+	return tree;
 };

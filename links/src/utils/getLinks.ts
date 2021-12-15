@@ -18,7 +18,7 @@ type Links =
 	| {
 			[uuid: string]: Link;
 	  }
-	| undefined;
+	| ArrayLike<Link>;
 
 type GetLinks = {
 	(site?: string): Promise<Links>;
@@ -31,7 +31,10 @@ type GetLinks = {
 export const getLinks: GetLinks = async () => {
 	try {
 		const slug = `cdn/links`;
-		const { data } = await storyblok.get(slug);
+		const { data } = await storyblok.get(slug, {
+			token: "AoN9E9TCJ0hFwmN8oec1AQtt",
+		});
+
 		return data.links;
 	} catch (error: any) {
 		console.log(`Cannot get:`, error.message);
