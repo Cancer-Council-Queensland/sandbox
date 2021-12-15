@@ -32,7 +32,7 @@ export const getLinks: GetLinks = async () => {
 	try {
 		const slug = `cdn/links`;
 		const { data } = await storyblok.get(slug, {
-			token: "AoN9E9TCJ0hFwmN8oec1AQtt",
+			token: "api token",
 		});
 
 		return data.links;
