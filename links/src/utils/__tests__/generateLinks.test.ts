@@ -18,10 +18,6 @@ test("totree: array with one child", () => {
 	assert.equal(tree, tree2);
 });
 
-type types = {
-	id: number;
-	parent_id: number;
-};
 type type2 = {
 	id: number;
 	parent_id: number;
