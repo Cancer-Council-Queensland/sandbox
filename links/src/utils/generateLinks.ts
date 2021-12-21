@@ -37,12 +37,10 @@ export type GetSiblings = {
 // getSiblings(tree, '/cancerqld/research')
 export const getSiblings: GetSiblings = (arr, slug) => {
 	let tree: Tree = [];
-	let parent: number;
 	for (const node of arr) {
-		if (node.slug === slug) {
-			parent = node.parent_id;
-			tree = toTree(arr, parent);
-		}
+		if (node.slug !== slug) continue;
+		
+		tree = toTree(arr, node.parent_id);
 	}
 	return tree;
 };
