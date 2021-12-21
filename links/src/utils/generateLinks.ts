@@ -61,10 +61,10 @@ export const toTree: ToTree = (arr, parent_id = 0) => {
 export const getParents: GetSiblings = (arr, slug) => {
 	let tree: Tree = [];
 	for (const node of arr) {
-		if (node.slug === slug) {
-			tree = closestParent(arr, node.parent_id);
-			tree.push(node);
-		}
+    if (node.slug !== slug) continue;
+
+		tree = closestParent(arr, node.parent_id);
+		tree.push(node);
 	}
 	return tree;
 };
