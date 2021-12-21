@@ -73,13 +73,13 @@ export const getParents: GetSiblings = (arr, slug) => {
 export const closestParent: ToTree = (arr, parent) => {
 	let tree: Tree = [];
 	for (const node of arr) {
-		if (node.id === parent) {
-			if (node.parent_id !== 0) {
-				//recursion -  to get the gradparents
-				tree = closestParent(arr, node.parent_id);
-			}
-			tree.push(node);
+	  if (node.id !== parent) continue;
+	  
+		if (node.parent_id !== 0) {
+			//recursion -  to get the gradparents
+			tree = closestParent(arr, node.parent_id);
 		}
+		tree.push(node);
 	}
 	return tree;
 };
