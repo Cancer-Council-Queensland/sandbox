@@ -47,12 +47,11 @@ export const getSiblings: GetSiblings = (arr, slug) => {
 export const toTree: ToTree = (arr, parent_id = 0) => {
 	let tree: Tree = [];
 	for (const node of arr) {
-		// use key value to get parent
-		if (node.parent_id === parent_id) {
-			let child_tree = toTree(arr, node.id);
-			let children = child_tree.length ? child_tree : undefined;
-			tree.push({ ...node, children });
-		}
+    if (node.parent_id !== parent_id) continue;
+    
+		let child_tree = toTree(arr, node.id);
+		let children = child_tree.length ? child_tree : undefined;
+		tree.push({ ...node, children });
 	}
 	return tree;
 };
