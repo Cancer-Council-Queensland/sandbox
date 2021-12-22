@@ -14,9 +14,6 @@ export const generateLinks: GenerateLinks = async () => {
 	const links = await getLinks();
 	const arr = Object.values(links);
 	let tree = toTree(arr);
-	getSiblings(arr, "cancerqld/research");
-	getParents(arr, "cancerqld");
-	//fs.writeFileSync("./output.json", JSON.stringify(sibling, null, 2));
 	return tree;
 };
 
