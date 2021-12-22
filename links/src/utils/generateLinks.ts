@@ -1,6 +1,6 @@
 import { getLinks } from "./getLinks";
-import { getSiblings } from "./getsiblings";
-import { getParents } from "./getparents";
+import { getSiblings } from "./getSibling";
+import { getParents } from "./getParent";
 
 type GenerateLinks = {
 	(): Promise<any>;
