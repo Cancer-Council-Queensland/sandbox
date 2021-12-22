@@ -28,15 +28,10 @@ export type Node = {
 
 export type NodeWithChildren = Node & { children?: NodeWithChildren[] };
 
-// export type Tree = Node[];
 export type Tree = NodeWithChildren[];
 
 export type ToTree = {
 	(arr: Node[], parent_id?: number): Tree;
-};
-
-export type GetSiblings = {
-	(arr: Node[], slug: string): Tree;
 };
 
 export const toTree: ToTree = (arr, parent_id = 0) => {

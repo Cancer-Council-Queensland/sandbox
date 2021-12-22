@@ -1,6 +1,6 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
-import { getParents } from "../getparents";
+import { getParents } from "../getParent";
 import { Tree, Node } from "../generateLinks";
 let initial: Node[] = [
 	{ id: 75884024, parent_id: 0, slug: "cancerqld" },
@@ -20,6 +20,13 @@ let initial: Node[] = [
 		slug: "cancerqld/",
 	},
 ];
+
+/**
+ * @intial - Initial  common array with nodes
+ * @test   - duplicate value, case sensitive, empty array
+ * @test   - sibling with child/leaf
+ * @test   - node with no siblings
+ */
 test("getParent: Get the Root ", () => {
 	const expected: Tree = [{ id: 75884024, parent_id: 0, slug: "cancerqld" }];
 	let tree = getParents(initial, "cancerqld");

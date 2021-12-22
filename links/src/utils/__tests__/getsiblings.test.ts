@@ -1,6 +1,6 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
-import { getSiblings } from "../getsiblings";
+import { getSiblings } from "../getSibling";
 import { Tree, Node } from "../generateLinks";
 
 export let initial: Node[] = [
@@ -18,6 +18,14 @@ export let initial: Node[] = [
 		slug: "cancerqld/research/viertel-cancer-research-centre",
 	},
 ];
+
+/**
+ * @intial - Initial  common array with nodes
+ * @test   - case sensitive
+ * @test   - sibling with child/leaf
+ * @test   - node with no siblings, empty array
+ * @test   - duplicate value  -- yet to be implemented
+ */
 test("getSiblings: Get siblings with child", () => {
 	const expected: Tree = [
 		{
@@ -62,4 +70,42 @@ test("getSiblings: Get a node with no sibling", () => {
 	assert.equal(tree, expected);
 });
 
+test("getSiblings: case Sensitive and duplicate ", () => {
+	const actual: Tree = [
+		{
+			id: 90833231,
+			parent_id: 0,
+			slug: "cancerqld/Research",
+			children: undefined,
+		},
+		{
+			id: 90833231,
+			parent_id: 75884024,
+			slug: "cancerqld/research",
+			children: undefined,
+		},
+	];
+	const expected: Tree = [
+		{
+			id: 90833231,
+			parent_id: 0,
+			slug: "cancerqld/Research",
+			children: undefined,
+		},
+	];
+	let tree = getSiblings(actual, "cancerqld/Research");
+	assert.equal(tree, expected);
+});
+
+test("getSiblings: empty slug ", () => {
+	const expected: Tree = [];
+	let tree = getSiblings(initial, "");
+	assert.equal(tree, expected);
+});
+
+test("getSiblings: empty array ", () => {
+	const actual: Tree = [];
+	let tree = getSiblings(actual, "1/2");
+	assert.equal(tree, []);
+});
 test.run();
