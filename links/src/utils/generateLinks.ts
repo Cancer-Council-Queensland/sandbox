@@ -25,7 +25,6 @@ export type Node = {
 
 export type NodeWithChildren = Node & { children?: NodeWithChildren[] };
 
-// export type Tree = Node[];
 export type Tree = NodeWithChildren[];
 
 export type ToTree = {
