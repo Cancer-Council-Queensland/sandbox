@@ -1,4 +1,6 @@
 import { getLinks } from "./getLinks";
+import { getSiblings } from "./getsiblings";
+import { getParents } from "./getparents";
 
 type GenerateLinks = {
 	(): Promise<any>;
@@ -11,9 +13,11 @@ type GenerateLinks = {
 export const generateLinks: GenerateLinks = async () => {
 	const links = await getLinks();
 	const arr = Object.values(links);
+	let tree = toTree(arr);
 	getSiblings(arr, "cancerqld/research");
-	getParents(arr, "cancerqld/research/viertel-cancer-research-centre");
-	return;
+	getParents(arr, "cancerqld");
+	//fs.writeFileSync("./output.json", JSON.stringify(sibling, null, 2));
+	return tree;
 };
 
 export type Node = {
@@ -24,6 +28,7 @@ export type Node = {
 
 export type NodeWithChildren = Node & { children?: NodeWithChildren[] };
 
+// export type Tree = Node[];
 export type Tree = NodeWithChildren[];
 
 export type ToTree = {
@@ -34,51 +39,13 @@ export type GetSiblings = {
 	(arr: Node[], slug: string): Tree;
 };
 
-// getSiblings(tree, '/cancerqld/research')
-export const getSiblings: GetSiblings = (arr, slug) => {
-	let tree: Tree = [];
-	for (const node of arr) {
-		if (node.slug !== slug) continue;
-		
-		tree = toTree(arr, node.parent_id);
-	}
-	return tree;
-};
 export const toTree: ToTree = (arr, parent_id = 0) => {
 	let tree: Tree = [];
 	for (const node of arr) {
-    if (node.parent_id !== parent_id) continue;
-    
+		if (node.parent_id !== parent_id) continue;
 		let child_tree = toTree(arr, node.id);
 		let children = child_tree.length ? child_tree : undefined;
 		tree.push({ ...node, children });
-	}
-	return tree;
-};
-
-// getParents(tree, '/cancerqld/research') get parent_id of slug
-export const getParents: GetSiblings = (arr, slug) => {
-	let tree: Tree = [];
-	for (const node of arr) {
-    if (node.slug !== slug) continue;
-
-		tree = closestParent(arr, node.parent_id);
-		tree.push(node);
-	}
-	return tree;
-};
-
-//closesrparent - get the second closest parent_id
-export const closestParent: ToTree = (arr, parent) => {
-	let tree: Tree = [];
-	for (const node of arr) {
-	  if (node.id !== parent) continue;
-	  
-		if (node.parent_id !== 0) {
-			//recursion -  to get the gradparents
-			tree = closestParent(arr, node.parent_id);
-		}
-		tree.push(node);
 	}
 	return tree;
 };
