@@ -1,4 +1,4 @@
-import { storyblok } from "../lib/storyblok";
+import { storyblok } from "../storyblok";
 
 type Link = {
 	id: number;
@@ -26,7 +26,7 @@ type GetLinks = {
 
 /**
  * Attempts to get all links from storyblok given a prefix filter
- * @returns
+ * @returns all links from Storyblok
  */
 export const getLinks: GetLinks = async () => {
 	try {
